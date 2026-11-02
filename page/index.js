@@ -267,7 +267,7 @@ Page({
           },
         },
         widgets.Button({
-          text: "Клавиатура",
+          text: "Клавіатура",
           normal_color: 0x0c86d1,
           press_color: 0x0c86d1,
           click_func: () => {
@@ -282,7 +282,7 @@ Page({
           },
         }),
         widgets.Button({
-          text: "Настройки",
+          text: "Налаштування",
           normal_color: 0x0c86d1,
           press_color: 0x0c86d1,
           click_func: () => {
@@ -685,7 +685,7 @@ Page({
         console.log("complete");
         deleteKeyboard();
         showToast({
-          content: "Ввод: " + result.data,
+          content: "Введено: " + result.data,
         });
         cb && cb();
       },

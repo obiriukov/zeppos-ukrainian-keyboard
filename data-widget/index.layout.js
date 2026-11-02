@@ -80,7 +80,7 @@ export const styles = {
     },
   },
   toggleLang: {
-    text: "Сменить язык",
+    text: "Змінити мову",
     normal_color: 0x000000,
     press_color: 0x333333,
     radius: 10,

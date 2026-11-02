@@ -2,7 +2,7 @@
   "configVersion": "v3",
   "app": {
     "appId": 1099965,
-    "appName": "Русская Клавиатура",
+    "appName": "Українська Клавіатура",
     "appType": "app",
     "version": {
       "code": 1,
@@ -29,13 +29,13 @@
         "data-widget": {
           "widgets": [
             {
-              "name": "Русская Клавиатура",
+              "name": "Українська Клавіатура",
               "path": "data-widget/index.page",
               "icon": "icon.png",
               "runtime": {
                 "ability": [
                   {
-                    "name": "ru-RU",
+                    "name": "uk-UA",
                     "type": 2,
                     "subType": []
                   }
@@ -59,10 +59,10 @@
   },
   "i18n": {
     "en-US": {
-      "appName": "Русская Клавиатура"
+      "appName": "Українська Клавіатура"
     },
-    "ru-RU": {
-      "appName": "Русская Клавиатура"
+    "uk-UA": {
+      "appName": "Українська Клавіатура"
     }
   },
   "defaultLanguage": "en-US"

@@ -1,51 +1,39 @@
-![icon](https://github.com/ARTEMIY-FCC/zeppos-russian-keyboard/blob/main/assets/default.r/icon.png?raw=true)
-# Русская клавиатура для Zepp OS (API 4.2)
-![screens](https://github.com/ARTEMIY-FCC/zeppos-russian-keyboard/blob/main/screenshots/s.png?raw=true)
-   ![screenr](https://github.com/ARTEMIY-FCC/zeppos-russian-keyboard/blob/main/screenshots/r.PNG?raw=true)
+![icon](assets/default.r/icon.png)
+# Українська клавіатура для Zepp OS (API 4.2)
+![screens](screenshots/s.png)
+   ![screenr](screenshots/r.PNG)
 
-Кастомная русская клавиатура для часов на платформе **Zepp OS**. Работает с **API 4.2** и интегрируется в системные поля ввода (ответы на сообщения и т.п.). В проект добавлены скриншоты интерфейса и иконка приложения.
+Кастомна українська клавіатура для годинників на платформі **Zepp OS**. Працює з **API 4.2** та інтегрується в системні поля вводу (відповіді на повідомлення тощо). У проєкт додано скриншоти інтерфейсу та іконку застосунку.
 
-# Особенности
-- Поддержка ввода на русском языке.  
-- Подсказки типа Т9, формируются из мини-словаря проекта — **~120 слов**.  
+# Особливості
+- Підтримка вводу українською мовою (розкладка ЙЦУКЕН, довге натискання г→ґ та і→ї).
+- Підказки типу Т9, формуються з міні-словника проєкту — **~120 слів**.
 
-# Быстрая установка исходников
-Откройте терминал и выполните:
+# Швидке встановлення вихідного коду
+Відкрийте термінал і виконайте:
 
 ```bash
-git clone https://github.com/ARTEMIY-FCC/zeppos-russian-keyboard.git
-cd zeppos-russian-keyboard
-````
+git clone <URL-цього-репозиторію>
+cd zeppos-ukrainian-keyboard
+```
 
-Далее установите `zeus` CLI согласно официальной инструкции:
+Далі встановіть `zeus` CLI згідно з офіційною інструкцією:
 [https://docs.zepp.com/docs/guides/tools/cli/](https://docs.zepp.com/docs/guides/tools/cli/)
 
-После установки `zeus` выполните подготовку файла (распаковка node_modules):
+Після встановлення `zeus` виконайте підготовку файлу (розпакування node_modules):
 
 ```bash
 python3 preapre_all.py
 ```
 
-# Сборка и установка на устройство
+# Збірка та встановлення на пристрій
 
-1. Для установки пакета на устройство можно воспользоваться QR с 4PDA:
-   [https://4pda.to/forum/index.php?showtopic=1052827&st=4240#entry140243476](https://4pda.to/forum/index.php?showtopic=1052827&st=4240#entry140243476)
-2. Если вы редактируете код под себя, для установки на устройство используем команду
+Якщо ви редагуєте код під себе, для встановлення на пристрій використовуємо команду:
 ```bash
 zeus preview
 ```
 
-# Благодарности
+# Подяки
 
-Спасибо автору `silver-zepp` — образцу, на который опирался этот проект:
+Дякуємо автору `silver-zepp` — зразку, на який спирався цей проєкт:
 [https://github.com/silver-zepp/zeppos-samples/tree/main/application/4.2/simple-keyboard](https://github.com/silver-zepp/zeppos-samples/tree/main/application/4.2/simple-keyboard)
-
-# Контакты
-
-* Email: `artemiy0216@icloud.com`
-* Telegram: [https://t.me/stukarchuk](https://t.me/stukarchuk)
-
-# Поддержать
-
-Если хотите поддержать развитие проекта:
-[https://www.donationalerts.com/r/artmix_cuber07](https://www.donationalerts.com/r/artmix_cuber07)

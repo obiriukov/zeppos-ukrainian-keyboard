@@ -10,7 +10,7 @@ def safe_make_dir(path):
     os.makedirs(path, exist_ok=True)
 
 def is_within_directory(directory, target):
-    # Защита от zip-slip
+    # Захист від zip-slip
     abs_directory = os.path.abspath(directory)
     abs_target = os.path.abspath(target)
     return os.path.commonpath([abs_directory]) == os.path.commonpath([abs_directory, abs_target])
@@ -30,7 +30,7 @@ def safe_extract_member(zipf, member, target_path):
 
 def main():
     if not os.path.isfile(ZIP_PATH):
-        print(f"Архив не найден: {ZIP_PATH}")
+        print(f"Архів не знайдено: {ZIP_PATH}")
         return
 
     safe_make_dir(EXTRACT_FOLDER)
@@ -38,52 +38,52 @@ def main():
     with zipfile.ZipFile(ZIP_PATH, "r") as z:
         names = z.namelist()
 
-        # Проверим, есть ли в архиве упоминания node_modules/
+        # Перевіримо, чи є в архіві згадки node_modules/
         has_node_modules_paths = any(("node_modules/" in n) or (n.rstrip("/") == "node_modules") for n in names)
 
         if has_node_modules_paths:
-            # Извлекаем только то, что внутри node_modules, удаляя префикс до node_modules/
+            # Витягуємо лише те, що всередині node_modules, прибираючи префікс до node_modules/
             for member in z.infolist():
                 name = member.filename
-                # Игнорируем мета-пути типа __MACOSX, но это не обязательно
+                # Ігноруємо мета-шляхи на кшталт __MACOSX, але це не обов'язково
                 if "node_modules/" in name:
-                    # берем часть после первого вхождения 'node_modules/'
+                    # беремо частину після першого входження 'node_modules/'
                     rel = name.split("node_modules/", 1)[1]
                     if not rel:
-                        # если это сама папка node_modules (директория), пропускаем
+                        # якщо це сама папка node_modules (директорія), пропускаємо
                         continue
                     dest = os.path.join(EXTRACT_FOLDER, rel)
                 elif name.rstrip("/") == "node_modules":
-                    # папка node_modules сама по себе — пропускаем
+                    # папка node_modules сама по собі — пропускаємо
                     continue
                 else:
-                    # игнорируем все, что не внутри node_modules
+                    # ігноруємо все, що не всередині node_modules
                     continue
 
-                # защита от выхода за пределы папки назначения
+                # захист від виходу за межі папки призначення
                 if not is_within_directory(EXTRACT_FOLDER, dest):
-                    raise Exception("Обнаружен потенциально опасный путь в архиве: " + name)
+                    raise Exception("Виявлено потенційно небезпечний шлях в архіві: " + name)
 
-                # создаем и записываем
+                # створюємо та записуємо
                 if member.is_dir():
                     safe_make_dir(dest)
                 else:
                     safe_make_dir(os.path.dirname(dest) or ".")
                     safe_extract_member(z, member, dest)
         else:
-            # В архиве нет node_modules — распакуем всё как есть в папку EXTRACT_FOLDER
+            # В архіві немає node_modules — розпакуємо все як є в папку EXTRACT_FOLDER
             for member in z.infolist():
                 dest = os.path.join(EXTRACT_FOLDER, member.filename)
-                # защита от zip-slip
+                # захист від zip-slip
                 if not is_within_directory(EXTRACT_FOLDER, dest):
-                    raise Exception("Обнаружен потенциально опасный путь в архиве: " + member.filename)
+                    raise Exception("Виявлено потенційно небезпечний шлях в архіві: " + member.filename)
                 if member.is_dir():
                     safe_make_dir(dest)
                 else:
                     safe_make_dir(os.path.dirname(dest) or ".")
                     safe_extract_member(z, member, dest)
 
-    print(f"Рас упаковка завершена в папку: {EXTRACT_FOLDER}")
+    print(f"Розпакування завершено в папку: {EXTRACT_FOLDER}")
 
 if __name__ == "__main__":
     main()

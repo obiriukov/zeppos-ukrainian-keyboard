@@ -24,10 +24,10 @@ function createWidget2(type, props, layoutParent) {
   });
 }
 
-// словарь
+// словник
 const T9_DICTIONARY = [
-  "и", "в", "не", "я", "на", "что", "он", "с", "как", "это", "по", "а", "к", "то", "у", "из", "за", "ты", "мы", "она", "они", "для", "так", "но", "его", "же", "от", "такой", "или", "уже", "когда", "если", "про", "да", "все", "там", "о", "только", "до", "бы", "ещё", "при", "меня", "тебя", "нет", "можно", "ну", "где", "чтобы", "чем", "тут", "здесь", "было", "был", "быть", "будет", "есть", "дела", "сейчас", "тогда", "люди", "жизнь", "очень", "раз", "два", "сам", "под", "после", "тот", "откуда", "почему", "куда", "кто", "что-то", "уходить", "думать", "знать", "говорить", "видеть", "идти", "хорошо", "плохо", "лучше", "может", "нужно", "дом", "день", "разве", "слишком", "почти", "сразу", "никто", "ничто", "вроде", "между", "или",
-  "привет", "здравствуйте", "пока", "до свидания", "спасибо", "пожалуйста", "извините", "доброе утро", "добрый день", "добрый вечер", "спокойной ночи", "рад", "рада", "поздравляю", "прошу", "не за что", "будьте добры"
+  "і", "в", "не", "я", "на", "що", "він", "з", "як", "це", "по", "а", "до", "то", "у", "із", "за", "ти", "ми", "вона", "вони", "для", "так", "але", "його", "ж", "від", "такий", "або", "вже", "коли", "якщо", "про", "так", "всі", "там", "о", "тільки", "до", "б", "ще", "при", "мене", "тебе", "немає", "можна", "ну", "де", "щоб", "ніж", "тут", "тут", "було", "був", "бути", "буде", "є", "справи", "зараз", "тоді", "люди", "життя", "дуже", "раз", "два", "сам", "під", "після", "той", "звідки", "чому", "куди", "хто", "щось", "йти", "думати", "знати", "говорити", "бачити", "добре", "погано", "краще", "може", "потрібно", "дім", "день", "хіба", "занадто", "майже", "одразу", "ніхто", "ніщо", "схоже", "між", "або",
+  "привіт", "доброго дня", "бувай", "до побачення", "дякую", "будь ласка", "вибачте", "доброго ранку", "добрий день", "добрий вечір", "на добраніч", "радий", "рада", "вітаю", "прошу", "нема за що", "будьте ласкаві"
 ];
 
 DataWidget({
@@ -50,14 +50,14 @@ DataWidget({
   safeSendFnKey(constOrName) {
     const k = this.getKeyboard();
     if (!k || typeof k.sendFnKey !== "function") {
-      console.log("safeSendFnKey: клавиатура недоступна");
+      console.log("safeSendFnKey: клавіатура недоступна");
       return;
     }
     try {
       const val = typeof constOrName === "string" && k[constOrName] !== undefined ? k[constOrName] : constOrName;
       k.sendFnKey(val);
     } catch (e) {
-      console.log("Ошибка при отправке клавиши:", e);
+      console.log("Помилка під час надсилання клавіші:", e);
     }
   },
   safeInputText(text) {
@@ -66,10 +66,10 @@ DataWidget({
       try {
         k.inputText(text);
       } catch (e) {
-        console.log("Ошибка при вводе текста:", e);
+        console.log("Помилка під час введення тексту:", e);
       }
     } else {
-      console.log("Клавиатура недоступна, текст сохранён локально");
+      console.log("Клавіатура недоступна, текст збережено локально");
       this.setState({ inputText: this.state.inputText + text });
     }
   },
@@ -79,10 +79,10 @@ DataWidget({
       try {
         k.inputBuffer(buffer, color1, color2);
       } catch (e) {
-        console.log("Ошибка при вводе буфера:", e);
+        console.log("Помилка під час введення буфера:", e);
       }
     } else {
-      console.log("Клавиатура не поддерживает inputBuffer");
+      console.log("Клавіатура не підтримує inputBuffer");
     }
   },
   safeClearInput() {
@@ -91,10 +91,10 @@ DataWidget({
       try {
         k.clearInput();
       } catch (e) {
-        console.log("Ошибка при очистке ввода:", e);
+        console.log("Помилка під час очищення вводу:", e);
       }
     } else {
-      console.log("Клавиатура недоступна, очистка локально");
+      console.log("Клавіатура недоступна, очищення локально");
       this.setState({
         inputBuffer: "",
         candidates: [],
@@ -109,7 +109,7 @@ DataWidget({
       try {
         return k.getTextContext();
       } catch (e) {
-        console.log("Ошибка при получении контекста:", e);
+        console.log("Помилка під час отримання контексту:", e);
         return null;
       }
     }
@@ -124,11 +124,11 @@ DataWidget({
     }
   },
   onInit() {
-    console.log("Инициализация виджета");
+    console.log("Ініціалізація віджета");
     try {
       this.state.inputMethod = new InputMethodManager();
     } catch (e) {
-      console.log("Ошибка инициализации InputMethodManager, используем фоллбек:", e);
+      console.log("Помилка ініціалізації InputMethodManager, використовуємо резервний варіант:", e);
       this.state.inputMethod = {
         currentMethod: "pinyin",
         getCurrentMethod: function() {
@@ -142,24 +142,24 @@ DataWidget({
   },
   renderCandidates(vc1) {
     if (!vc1) {
-      console.log("Контейнер не определён, пропускаем отрисовку");
+      console.log("Контейнер не визначено, пропускаємо відмальовування");
       return;
     }
     try {
       this.commitTextBuffer();
     } catch (e) {
-      console.log("Ошибка при фиксации буфера:", e);
+      console.log("Помилка під час фіксації буфера:", e);
     }
     const children = vc1.layoutChildren || [];
     children.forEach((c) => {
       try {
         deleteWidget(c);
       } catch (e) {
-        console.log("Ошибка при удалении виджета:", e);
+        console.log("Помилка під час видалення віджета:", e);
       }
     });
     vc1.layoutChildren = [];
-    // Центрируем контейнер для подсказки из словарика
+    // Центруємо контейнер для підказки зі словника
     const centerContainer = createWidget2(
       widget.VIRTUAL_CONTAINER,
       {
@@ -174,16 +174,16 @@ DataWidget({
       },
       vc1
     );
-    // удаляем старую подсказку, если есть
+    // видаляємо стару підказку, якщо є
     if (this.state.t9Widget) {
       try {
         deleteWidget(this.state.t9Widget);
       } catch (e) {
-        // игнорируем ошибки, если уже удалён
+        // ігноруємо помилки, якщо вже видалено
       }
       this.state.t9Widget = null;
     }
-    // Отрисовываем T9-подсказку, если есть кандидаты
+    // Відмальовуємо T9-підказку, якщо є кандидати
     if (this.state.t9Candidates.length > 0 && this.state.recentInput.length > 0) {
       const t9Word = this.state.t9Candidates[0];
       const t9Btn = createWidget2(
@@ -199,7 +199,7 @@ DataWidget({
       );
       this.state.t9Widget = t9Btn;
     }
-    // Кнопка удалить
+    // Кнопка видалити
     const deleteBtnContainer = createWidget2(
       widget.VIRTUAL_CONTAINER,
       {
@@ -249,7 +249,7 @@ DataWidget({
     try {
       updateLayout(vc1);
     } catch (e) {
-      console.log("Ошибка при обновлении layout:", e);
+      console.log("Помилка під час оновлення layout:", e);
     }
   },
   build() {
@@ -267,7 +267,7 @@ DataWidget({
       this.renderCurrentInputKeys(vc2);
       this.renderActionKeys(vc2);
     } catch (e) {
-      console.log("Ошибка при сборке интерфейса:", e);
+      console.log("Помилка під час побудови інтерфейсу:", e);
     }
   },
   getT9Predictions(input) {
@@ -303,7 +303,7 @@ DataWidget({
       : "pinyin";
     const keys = [
       ["й", "ц", "у", "к", "е", "н", "г", "ш", "щ", "з", "х"],
-      ["ф", "ы", "в", "а", "п", "р", "о", "л", "д", "ж", "э"],
+      ["ф", "і", "в", "а", "п", "р", "о", "л", "д", "ж", "є"],
       ["я", "ч", "с", "м", "и", "т", "ь", "б", "ю"],
     ];
     return keys.map((row, rowIndex) => {
@@ -336,10 +336,10 @@ DataWidget({
             this.handleKeyPress(key);
           },
           longpress_func: () => {
-            if (key === "е") {
-              this.safeInputText("ё");
-            } else if (key === "ь") {
-              this.safeInputText("ъ");
+            if (key === "г") {
+              this.safeInputText("ґ");
+            } else if (key === "і") {
+              this.safeInputText("ї");
             }
           }
         });
@@ -357,7 +357,7 @@ DataWidget({
       },
       vc
     );
-    // Кнопка смены языка
+    // Кнопка зміни мови
     let vc4 = createWidget2(
       widget.VIRTUAL_CONTAINER,
       {
@@ -407,7 +407,7 @@ DataWidget({
       },
       vc4
     );
-    // Кнопка пробела
+    // Кнопка пробілу
     const spaceBtnContainer = createWidget2(
       widget.VIRTUAL_CONTAINER,
       {
@@ -451,7 +451,7 @@ DataWidget({
       },
       spaceBtnContainer
     );
-    // Кнопка Enter (заменена на tick.png)
+    // Кнопка Enter (замінена на tick.png)
     const enterBtnContainer = createWidget2(
       widget.VIRTUAL_CONTAINER,
       {
@@ -511,7 +511,7 @@ DataWidget({
       let newRecentInput = this.state.recentInput;
       if (key === " ") {
         newRecentInput = "";
-      } else if (key.length === 1 && /[а-яёА-ЯЁ]/.test(key)) {
+      } else if (key.length === 1 && /[а-щьюяА-ЩЬЮЯіїєґІЇЄҐ]/.test(key)) {
         newRecentInput = newRecentInput + key.toLowerCase();
         if (newRecentInput.length > 5) {
           newRecentInput = newRecentInput.slice(-5);
@@ -610,10 +610,10 @@ DataWidget({
     try {
       this.safeInputBuffer(this.state.inputBuffer, 0x757575, 0x757575);
     } catch (e) {
-      console.log("Ошибка при фиксации буфера:", e);
+      console.log("Помилка під час фіксації буфера:", e);
     }
   },
   onDestroy() {
-    console.log("⚡ Виджет - В С Е");
+    console.log("⚡ Віджет - У С Е");
   },
 });
